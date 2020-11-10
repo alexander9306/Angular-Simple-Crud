@@ -1,0 +1,55 @@
+query GetCars{
+  cars {
+    ...CarDetails
+  }
+}
+
+
+mutation AddCar(
+  $brand: String!
+  $model: String!
+  $color: String!
+  $year: Int!
+) {
+  createCar(
+    createCarInput: { brand: $brand, model: $model, color: $color, year: $year }
+  ) {
+    ...CarDetails
+  }
+}
+
+mutation UpdateCar(
+  $id: ID!
+  $brand: String!
+  $model: String!
+  $color: String!
+  $year: Int!
+) {
+  updateCar(
+    updateCarInput: {
+      id: $id
+      brand: $brand
+      model: $model
+      color: $color
+      year: $year
+    }
+  ) {
+    ...CarDetails
+  }
+}
+
+
+
+mutation DeleteCar($id: ID!) {
+  removeCar(id: $id) {
+    ...CarDetails
+  }
+}
+
+fragment CarDetails on Car {
+  id
+  brand
+  model
+  color
+  year
+}

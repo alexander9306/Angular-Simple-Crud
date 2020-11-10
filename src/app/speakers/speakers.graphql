@@ -1,0 +1,51 @@
+query GetSpeakers{
+  speakers {
+    ...SpeakerDetails
+  }
+}
+
+
+mutation AddSpeaker(
+  $brand: String!
+  $model: String!
+  $power: Int!
+) {
+  createSpeaker(
+    createSpeakerInput: { brand: $brand, model: $model, power: $power }
+  ) {
+    ...SpeakerDetails
+  }
+}
+
+mutation UpdateSpeaker(
+  $id: ID!
+  $brand: String!
+  $model: String!
+  $power: Int!
+) {
+  updateSpeaker(
+    updateSpeakerInput: {
+      id: $id
+      brand: $brand
+      model: $model
+      power: $power
+    }
+  ) {
+    ...SpeakerDetails
+  }
+}
+
+
+
+mutation DeleteSpeaker($id: ID!) {
+  removeSpeaker(id: $id) {
+    ...SpeakerDetails
+  }
+}
+
+fragment SpeakerDetails on Speaker {
+  id
+  brand
+  model
+  power
+}

@@ -1,0 +1,52 @@
+      <h1 class="text-center">Car List</h1>
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">Brand</th>
+            <th class="text-center">Model</th>
+            <th class="text-center">Color</th>
+            <th class="text-center">Year</th>
+            <th class="text-center">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars | async">
+            <td>{{ car.brand }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.color }}</td>
+            <td>{{ car.year }}</td>
+            <td>
+              <button type="button" class="btn btn-info btn-sm mr-2" (click)="showEditCarForm(car)">Edit</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeCar(car)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success" (click)="showAddCarForm()">Add New Car</button>
+
+      <div class="mt-4">
+        <form *ngIf="carForm">
+          <h2>Add New Car</h2>
+          <p>Brand: <input type="text" name="brand" [(ngModel)]="newCar.brand" /></p>
+          <p>Model: <input type="text" name="model" [(ngModel)]="newCar.model" /></p>
+          <p>Color: <input type="text" name="color" [(ngModel)]="newCar.color" /></p>
+          <p>Year: <input type="number" name="year" [(ngModel)]="newCar.year" /></p>
+          <p>
+            <button type="button" class="btn btn-primary mr-2" (click)="saveCar(newCar)">Submit</button>
+            <button type="button" class="b-*+321tn btn-warning" (click)="cancelNewCar()">Cancel</button>
+          </p>
+        </form>
+
+        <form *ngIf="editCarForm">
+          <h2>Edit Car Details</h2>
+           <p>Brand: <input type="text" name="brand" [(ngModel)]="editedCar.brand" /></p>
+          <p>Model: <input type="text" name="model" [(ngModel)]="editedCar.model" /></p>
+          <p>Color: <input type="text" name="color" [(ngModel)]="editedCar.color" /></p>
+          <p>Year: <input type="number" name="year" [(ngModel)]="editedCar.year" /></p>
+          <p>
+            <button type="button" class="btn btn-primary mr-2" (click)="updateCar()">Submit</button>
+            <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+          </p>
+        </form>
+      </div> 
+   

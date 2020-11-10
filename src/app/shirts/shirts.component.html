@@ -1,0 +1,48 @@
+<h1 class="text-center">Shirt List</h1>
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th class="text-center">Size</th>
+      <th class="text-center">Color</th>
+      <th class="text-center">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let shirt of shirts | async">
+      <td>{{ shirt.size }}</td>
+      <td>{{ shirt.color }}</td>
+      <td>
+        <button type="button" class="btn btn-info btn-sm mr-2" (click)="showEditShirtForm(shirt)">Edit</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="removeShirt(shirt)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-success" (click)="showAddShirtForm()">Add New Shirt</button>
+
+<div class="mt-4">
+  <form *ngIf="shirtForm">
+    <h2>Add New Shirt</h2>
+    <p>Size: <select [(ngModel)]="newShirt.size" name="size">
+        <option *ngFor="let enum of allowedSize | keyvalue" [ngValue]="enum.value">{{enum.key}}</option>
+      </select>
+    <p>Color: <input type="text" name="color" [(ngModel)]="newShirt.color" /></p>
+    <p>
+      <button type="button" class="btn btn-primary mr-2" (click)="saveShirt(newShirt)">Submit</button>
+      <button type="button" class="b-*+321tn btn-warning" (click)="cancelNewShirt()">Cancel</button>
+    </p>
+  </form>
+
+  <form *ngIf="editShirtForm">
+    <h2>Edit Shirt Details</h2>
+    <p>Size: <select [(ngModel)]="editedShirt.size" name="size">
+        <option *ngFor="let enum of allowedSize | keyvalue" [ngValue]="enum.value">{{enum.key}}</option>
+      </select>
+    </p>
+    <p>Color: <input type="text" name="color" [(ngModel)]="editedShirt.color" /></p>
+    <p>
+      <button type="button" class="btn btn-primary mr-2" (click)="updateShirt()">Submit</button>
+      <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+    </p>
+  </form>
+</div>

@@ -1,0 +1,47 @@
+query GetShirts{
+  shirts {
+    ...ShirtDetails
+  }
+}
+
+
+mutation AddShirt(
+  $size: AllowedSize!
+  $color: String!
+) {
+  createShirt(
+    createShirtInput: { size: $size, color: $color }
+  ) {
+    ...ShirtDetails
+  }
+}
+
+mutation UpdateShirt(
+  $id: ID!
+  $size: AllowedSize!
+  $color: String!
+) {
+  updateShirt(
+    updateShirtInput: {
+      id: $id
+      size: $size
+      color: $color
+    }
+  ) {
+    ...ShirtDetails
+  }
+}
+
+
+
+mutation DeleteShirt($id: ID!) {
+  removeShirt(id: $id) {
+    ...ShirtDetails
+  }
+}
+
+fragment ShirtDetails on Shirt {
+  id
+  size
+  color
+}

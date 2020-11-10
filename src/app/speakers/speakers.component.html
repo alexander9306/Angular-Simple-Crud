@@ -1,0 +1,47 @@
+<h1 class="text-center">Speaker List</h1>
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th class="text-center">Brand</th>
+      <th class="text-center">Model</th>
+      <th class="text-center">Power</th>
+      <th class="text-center">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let speaker of speakers | async">
+      <td>{{ speaker.brand }}</td>
+      <td>{{ speaker.model }}</td>
+      <td>{{ speaker.power }}</td>
+      <td>
+        <button type="button" class="btn btn-info btn-sm mr-2" (click)="showEditSpeakerForm(speaker)">Edit</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="removeSpeaker(speaker)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-success" (click)="showAddSpeakerForm()">Add New Speaker</button>
+
+<div class="mt-4">
+  <form *ngIf="speakerForm">
+    <h2>Add New Speaker</h2>
+    <p>Brand: <input type="text" name="brand" [(ngModel)]="newSpeaker.brand" /></p>
+    <p>Model: <input type="text" name="model" [(ngModel)]="newSpeaker.model" /></p>
+    <p>Power: <input type="number" name="power" [(ngModel)]="newSpeaker.power" /></p>
+    <p>
+      <button type="button" class="btn btn-primary mr-2" (click)="saveSpeaker(newSpeaker)">Submit</button>
+      <button type="button" class="b-*+321tn btn-warning" (click)="cancelNewSpeaker()">Cancel</button>
+    </p>
+  </form>
+
+  <form *ngIf="editSpeakerForm">
+    <h2>Edit Speaker Details</h2>
+     <p>Brand: <input type="text" name="brand" [(ngModel)]="editedSpeaker.brand" /></p>
+    <p>Model: <input type="text" name="model" [(ngModel)]="editedSpeaker.model" /></p>
+    <p>Power: <input type="number" name="power" [(ngModel)]="editedSpeaker.power" /></p>
+    <p>
+      <button type="button" class="btn btn-primary mr-2" (click)="updateSpeaker()">Submit</button>
+      <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+    </p>
+  </form>
+</div> 
